@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using music_performance_greenroom_server.Models;
 
 namespace music_performance_greenroom_server.Models
 {
@@ -10,6 +11,7 @@ namespace music_performance_greenroom_server.Models
         public virtual DbSet<UserCourse> UserCourse { get; set; }
         public virtual DbSet<UserMaterial> UserMaterial { get; set; }
         public virtual DbSet<AssignmentMaterial> AssignmentMaterial { get; set; }
+        public virtual DbSet<Group> Group { get; set; }
         public GreenroomDbContext(DbContextOptions<GreenroomDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -85,6 +87,29 @@ namespace music_performance_greenroom_server.Models
                     .HasForeignKey(material => material.AssignmentId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
+
+            modelBuilder.Entity<Group>(group => 
+            {
+                group.ToTable("Group");
+                group.HasKey(group => group.GroupId);
+                group.Property(group => group.GroupName).HasMaxLength(200).IsRequired();
+            });
+
+            modelBuilder.Entity<UserGroup>(group => 
+            {
+                group.ToTable("UserGroup");
+                group.HasKey(group => group.UserGroupId);
+                group.HasOne(group => group.User)
+                    .WithMany(user => user.UserGroups)
+                    .HasForeignKey(group =>  group.UserId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                group.HasOne(group => group.Group)
+                    .WithMany(group => group.UserGroups)
+                    .HasForeignKey(group => group.GroupId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
         }
+
+        public DbSet<music_performance_greenroom_server.Models.UserGroup> UserGroup { get; set; }
     }
 }
