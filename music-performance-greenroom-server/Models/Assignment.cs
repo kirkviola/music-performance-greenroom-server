@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace music_performance_greenroom_server.Models
 {
@@ -9,6 +10,8 @@ namespace music_performance_greenroom_server.Models
         public string AssignmentDescription { get; set; } = string.Empty;
         public double? AssignmentMaxValue { get; set; } = null;
         public double? AssignmentEarnedValue { get; set; } = null;
+        [Timestamp]
+        public DateTime ChangeTime { get; set; } = DateTime.Now;
         public int CourseId { get; set; }
 
         [JsonIgnore]

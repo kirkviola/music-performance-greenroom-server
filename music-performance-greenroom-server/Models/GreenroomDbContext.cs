@@ -29,12 +29,13 @@ namespace music_performance_greenroom_server.Models
             });
 
             modelBuilder.Entity<Assignment>(assignment => {
+                // Timestamp column configured in annotation
                 assignment.ToTable("Assignement");
                 assignment.HasKey(assign => assign.AssignmentId);
                 assignment.Property(assign => assign.AssignmentName).HasMaxLength(50).IsRequired();
                 assignment.Property(assign => assign.AssignmentDescription).HasMaxLength(300).IsRequired(false).HasDefaultValue(null);
                 assignment.Property(assign => assign.AssignmentMaxValue).HasColumnType("decimal(4,2)").HasDefaultValue(null);
-                assignment.Property(assign => assign.AssignmentEarnedValue).HasColumnType("decmial(4,2)").HasDefaultValue(null);
+                assignment.Property(assign => assign.AssignmentEarnedValue).HasColumnType("decimal(4,2)").HasDefaultValue(null);
                 assignment.HasOne(assign => assign.Course)
                     .WithMany(course => course.Assignments)
                     .HasForeignKey(assign => assign.CourseId)
