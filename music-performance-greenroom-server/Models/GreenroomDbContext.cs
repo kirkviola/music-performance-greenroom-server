@@ -82,7 +82,7 @@ namespace music_performance_greenroom_server.Models
                 material.ToTable("AssignmentMaterial");
                 material.HasKey(material => material.AssignmentMaterialId);
                 material.Property(material => material.AssignmentMaterialName).HasMaxLength(50).IsRequired();
-                material.Property(material => material.AssignmentMaterialDescription).HasMaxLength(300).IsRequired(false).HasDefaultValue(null);
+                material.Property(material => material.AssignmentMaterialDescription).HasMaxLength(500).IsRequired(false).HasDefaultValue(null);
                 material.HasOne(material => material.Assignment)
                     .WithMany(user => user.AssignmentMaterials)
                     .HasForeignKey(material => material.AssignmentId)

@@ -6,12 +6,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 // For initial development locally
-var connectionString = "GreenroomDbContext";
+var connectionString = builder.Configuration["DevEnv:ConnectionString"];
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<GreenroomDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString(connectionString));
+    options.UseSqlServer(connectionString);
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
