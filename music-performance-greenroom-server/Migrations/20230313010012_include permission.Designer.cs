@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using music_performance_greenroom_server.Models;
 
@@ -11,9 +12,11 @@ using music_performance_greenroom_server.Models;
 namespace music_performance_greenroom_server.Migrations
 {
     [DbContext(typeof(GreenroomDbContext))]
-    partial class GreenroomDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230313010012_include permission")]
+    partial class includepermission
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

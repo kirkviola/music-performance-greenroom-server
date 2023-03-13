@@ -71,6 +71,7 @@ namespace music_performance_greenroom_server.Models
                 material.HasKey(material => material.UserMaterialId);
                 material.Property(material => material.UserMaterialName).HasMaxLength(50).IsRequired();
                 material.Property(material => material.UserMaterialDescription).HasMaxLength(300).IsRequired(false).HasDefaultValue(null);
+                material.Property(material => material.UserMaterialAttachment).HasColumnType("varbinary(max)");
                 material.HasOne(material => material.User)
                     .WithMany(user => user.UserMaterials)
                     .HasForeignKey(material => material.UserId)
@@ -83,6 +84,7 @@ namespace music_performance_greenroom_server.Models
                 material.HasKey(material => material.AssignmentMaterialId);
                 material.Property(material => material.AssignmentMaterialName).HasMaxLength(50).IsRequired();
                 material.Property(material => material.AssignmentMaterialDescription).HasMaxLength(500).IsRequired(false).HasDefaultValue(null);
+                material.Property(material => material.AssignmentMaterialAttachment).HasColumnType("varbinary(max)");
                 material.HasOne(material => material.Assignment)
                     .WithMany(user => user.AssignmentMaterials)
                     .HasForeignKey(material => material.AssignmentId)
@@ -107,6 +109,17 @@ namespace music_performance_greenroom_server.Models
                 group.HasOne(group => group.Group)
                     .WithMany(group => group.UserGroups)
                     .HasForeignKey(group => group.GroupId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<UserPermission>(permission => 
+            {
+                permission.ToTable("UserPermission");
+                permission.HasKey(permission => permission.UserPermissionId);
+                permission.Property(permission => permission.Permission).HasMaxLength(30).IsRequired();
+                permission.HasOne(permission => permission.User)
+                    .WithMany(user => user.UserPermissions)
+                    .HasForeignKey(permission => permission.UserId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }

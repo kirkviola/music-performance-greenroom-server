@@ -11,6 +11,7 @@
         public virtual UserCourse[] UserCourses { get; set; }
         public virtual UserMaterial[] UserMaterials { get; set; }
         public virtual UserGroup[] UserGroups { get; set; }
+        public virtual UserPermission[] UserPermissions { get; set; }
 
         public User() {}
     }
