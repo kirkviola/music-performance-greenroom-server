@@ -10,6 +10,7 @@ namespace music_performance_greenroom_server.Models
         public virtual DbSet<Course> Course { get; set; }
         public virtual DbSet<UserCourse> UserCourse { get; set; }
         public virtual DbSet<UserMaterial> UserMaterial { get; set; }
+        public virtual DbSet<UserPermission> UserPermission { get; set; }
         public virtual DbSet<AssignmentMaterial> AssignmentMaterial { get; set; }
         public virtual DbSet<Group> Group { get; set; }
         public GreenroomDbContext(DbContextOptions<GreenroomDbContext> options) : base(options) { }
