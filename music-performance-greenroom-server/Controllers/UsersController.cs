@@ -31,7 +31,8 @@ namespace music_performance_greenroom_server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.User.FindAsync(id);
+            var user = await _context.User.Include(u => u.UserPermissions)
+                                          .FirstOrDefaultAsync(it => it.UserId == id);
 
             if (user == null)
             {
@@ -70,6 +71,13 @@ namespace music_performance_greenroom_server.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpGet("getUsersByCourseId/{courseId}")]
+        public async Task<ActionResult<List<User>>> GetUsersByCourseId(int courseId)
+        {
+            // Filter out the owner; list should only include students
+            return await _context.User.Include(u => u.UserCourses.Where(uc => uc.CourseId == courseId && !uc.IsOwner)).ToListAsync();
         }
 
         // POST: api/Users
