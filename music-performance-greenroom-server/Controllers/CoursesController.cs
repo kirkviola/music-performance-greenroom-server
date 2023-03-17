@@ -41,6 +41,15 @@ namespace music_performance_greenroom_server.Controllers
             return course;
         }
 
+        [HttpGet("getCoursesByUserId/{userId}")]
+        public async Task<ActionResult<List<Course>>> GetCoursesByUserId(int userId)
+        {
+            return await _context.Course.Include(c => c.UserCourses.Where(uc => uc.UserId == userId))
+                                        .Include(c => c.Assignments).ThenInclude(a => a.AssignmentMaterials)
+                                        .ToListAsync();
+                                               
+        }
+
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

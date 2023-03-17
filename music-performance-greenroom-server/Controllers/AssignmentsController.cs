@@ -41,6 +41,14 @@ namespace music_performance_greenroom_server.Controllers
             return assignment;
         }
 
+        [HttpGet("getAssignmentsByCourseId/{courseId}")]
+        public async Task<ActionResult<List<Assignment>>> GetAssignmentsByCourseId(int courseId)
+        {
+            return await _context.Assignment.Where(a => a.CourseId == courseId)
+                                            .Include(a => a.AssignmentMaterials) 
+                                            .ToListAsync();
+        } 
+
         // PUT: api/Assignments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
