@@ -1,4 +1,6 @@
-﻿namespace music_performance_greenroom_server.Models
+﻿using Newtonsoft.Json;
+
+namespace music_performance_greenroom_server.Models
 {
     public class UserCourse
     {
@@ -8,6 +10,7 @@
         public int CourseId { get; set; }
 
         public virtual Course Course { get; set; }
+        [JsonIgnore]
         public virtual User User { get; set; }
 
         public UserCourse() {}

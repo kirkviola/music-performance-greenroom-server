@@ -25,7 +25,6 @@ namespace music_performance_greenroom_server.Models
                 user.HasKey(user => user.UserId);
                 user.Property(user => user.FirstName).HasMaxLength(60).IsRequired();
                 user.Property(user => user.LastName).HasMaxLength(60).IsRequired();
-                user.Property(user => user.FullName).HasMaxLength(125).IsRequired();
                 user.Property(user => user.Email).HasMaxLength(250).IsRequired();
             });
 
