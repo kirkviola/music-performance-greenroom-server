@@ -4,7 +4,7 @@ namespace music_performance_greenroom_server.Models
 {
     public class UserPermission
     {
-        public int UserPermissionId { get; set; }
+        public int Id { get; set; }
         public Permission Permission { get; set; }
         public int UserId { get; set; }
 

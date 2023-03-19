@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>music_performance_greenroom_server</RootNamespace>
+    <RootNamespace>GreenroomServer</RootNamespace>
     <UserSecretsId>c961e0d2-f9fa-48f1-8295-9a8cf1d8d7e1</UserSecretsId>
   </PropertyGroup>
 

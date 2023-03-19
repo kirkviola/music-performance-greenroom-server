@@ -41,11 +41,11 @@ namespace music_performance_greenroom_server.Controllers
             return assignment;
         }
 
-        [HttpGet("getAssignmentsByCourseId/{courseId}")]
-        public async Task<ActionResult<List<Assignment>>> GetAssignmentsByCourseId(int courseId)
+        [HttpGet("getAssignmentsByCourseId/{id}")]
+        public async Task<ActionResult<List<Assignment>>> GetAssignmentsByCourseId(int id)
         {
-            return await _context.Assignment.Where(a => a.CourseId == courseId)
-                                            .Include(a => a.AssignmentMaterials) 
+            return await _context.Assignment.Where(a => a.CourseId == id)
+                                            .Include(a => a.Materials) 
                                             .ToListAsync();
         } 
 
@@ -54,7 +54,7 @@ namespace music_performance_greenroom_server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAssignment(int id, Assignment assignment)
         {
-            if (id != assignment.AssignmentId)
+            if (id != assignment.Id)
             {
                 return BadRequest();
             }
@@ -88,7 +88,7 @@ namespace music_performance_greenroom_server.Controllers
             _context.Assignment.Add(assignment);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAssignment", new { id = assignment.AssignmentId }, assignment);
+            return CreatedAtAction("GetAssignment", new { id = assignment.Id }, assignment);
         }
 
         // DELETE: api/Assignments/5
@@ -109,7 +109,7 @@ namespace music_performance_greenroom_server.Controllers
 
         private bool AssignmentExists(int id)
         {
-            return _context.Assignment.Any(e => e.AssignmentId == id);
+            return _context.Assignment.Any(e => e.Id == id);
         }
     }
 }
