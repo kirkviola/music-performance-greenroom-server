@@ -32,7 +32,7 @@ namespace music_performance_greenroom_server.Controllers
         public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await _context.User.Include(u => u.UserPermissions)
-                                          .FirstOrDefaultAsync(it => it.UserId == id);
+                                          .FirstOrDefaultAsync(it => it.Id == id);
 
             if (user == null)
             {
@@ -47,7 +47,7 @@ namespace music_performance_greenroom_server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
-            if (id != user.UserId)
+            if (id != user.Id)
             {
                 return BadRequest();
             }
@@ -88,7 +88,7 @@ namespace music_performance_greenroom_server.Controllers
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
+            return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
         // DELETE: api/Users/5
@@ -109,7 +109,7 @@ namespace music_performance_greenroom_server.Controllers
 
         private bool UserExists(int id)
         {
-            return _context.User.Any(e => e.UserId == id);
+            return _context.User.Any(e => e.Id == id);
         }
     }
 }

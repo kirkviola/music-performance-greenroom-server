@@ -2,15 +2,15 @@
 {
     public class User
     {
-        public int UserId { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
 
-        public virtual UserCourse[] UserCourses { get; set; }
-        public virtual UserMaterial[] UserMaterials { get; set; }
-        public virtual UserGroup[] UserGroups { get; set; }
-        public virtual UserPermission[] UserPermissions { get; set; }
+        public virtual IEnumerable<UserCourse> UserCourses { get; set; }
+        public virtual IEnumerable<Material> Materials { get; set; }
+        public virtual IEnumerable<UserGroup> UserGroups { get; set; }
+        public virtual IEnumerable<UserPermission> UserPermissions { get; set; }
 
         public User() {}
     }

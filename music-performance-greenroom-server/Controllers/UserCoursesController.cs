@@ -46,7 +46,7 @@ namespace music_performance_greenroom_server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUserCourse(int id, UserCourse userCourse)
         {
-            if (id != userCourse.UserCourseId)
+            if (id != userCourse.Id)
             {
                 return BadRequest();
             }
@@ -80,7 +80,7 @@ namespace music_performance_greenroom_server.Controllers
             _context.UserCourse.Add(userCourse);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUserCourse", new { id = userCourse.UserCourseId }, userCourse);
+            return CreatedAtAction("GetUserCourse", new { id = userCourse.Id }, userCourse);
         }
 
         // DELETE: api/UserCourses/5
@@ -101,7 +101,7 @@ namespace music_performance_greenroom_server.Controllers
 
         private bool UserCourseExists(int id)
         {
-            return _context.UserCourse.Any(e => e.UserCourseId == id);
+            return _context.UserCourse.Any(e => e.Id == id);
         }
     }
 }

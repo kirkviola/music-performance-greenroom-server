@@ -46,7 +46,7 @@ namespace music_performance_greenroom_server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUserGroup(int id, UserGroup userGroup)
         {
-            if (id != userGroup.UserGroupId)
+            if (id != userGroup.Id)
             {
                 return BadRequest();
             }
@@ -80,7 +80,7 @@ namespace music_performance_greenroom_server.Controllers
             _context.UserGroup.Add(userGroup);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUserGroup", new { id = userGroup.UserGroupId }, userGroup);
+            return CreatedAtAction("GetUserGroup", new { id = userGroup.Id }, userGroup);
         }
 
         // DELETE: api/UserGroups/5
@@ -101,7 +101,7 @@ namespace music_performance_greenroom_server.Controllers
 
         private bool UserGroupExists(int id)
         {
-            return _context.UserGroup.Any(e => e.UserGroupId == id);
+            return _context.UserGroup.Any(e => e.Id == id);
         }
     }
 }

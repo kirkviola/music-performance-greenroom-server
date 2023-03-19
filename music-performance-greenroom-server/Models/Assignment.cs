@@ -5,18 +5,18 @@ namespace music_performance_greenroom_server.Models
 {
     public class Assignment
     {
-        public int AssignmentId { get; set; }
-        public string AssignmentName { get; set; } = string.Empty;
-        public string AssignmentDescription { get; set; } = string.Empty;
-        public double? AssignmentMaxValue { get; set; } = null;
-        public double? AssignmentEarnedValue { get; set; } = null;
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public double? MaxValue { get; set; } = null;
+        public double? EarnedValue { get; set; } = null;
         [Timestamp]
         public DateTime ChangeTime { get; set; } = DateTime.Now;
         public int CourseId { get; set; }
 
         [JsonIgnore]
         public virtual Course Course { get; set; }
-        public virtual AssignmentMaterial[] AssignmentMaterials { get; set; }
+        public virtual IEnumerable<Material> Materials { get; set; }
 
         public Assignment() {}
     }

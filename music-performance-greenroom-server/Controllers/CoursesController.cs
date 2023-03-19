@@ -41,11 +41,11 @@ namespace music_performance_greenroom_server.Controllers
             return course;
         }
 
-        [HttpGet("getCoursesByUserId/{userId}")]
-        public async Task<ActionResult<List<Course>>> GetCoursesByUserId(int userId)
+        [HttpGet("getCoursesByUserId/{id}")]
+        public async Task<ActionResult<List<Course>>> GetCoursesByUserId(int id)
         {
-            return await _context.Course.Include(c => c.UserCourses.Where(uc => uc.UserId == userId))
-                                        .Include(c => c.Assignments).ThenInclude(a => a.AssignmentMaterials)
+            return await _context.Course.Include(c => c.UserCourses.Where(uc => uc.UserId == id))
+                                        .Include(c => c.Assignments).ThenInclude(a => a.Materials)
                                         .ToListAsync();
                                                
         }
@@ -55,7 +55,7 @@ namespace music_performance_greenroom_server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCourse(int id, Course course)
         {
-            if (id != course.CourseId)
+            if (id != course.Id)
             {
                 return BadRequest();
             }
@@ -89,7 +89,7 @@ namespace music_performance_greenroom_server.Controllers
             _context.Course.Add(course);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCourse", new { id = course.CourseId }, course);
+            return CreatedAtAction("GetCourse", new { id = course.Id }, course);
         }
 
         // DELETE: api/Courses/5
@@ -110,7 +110,7 @@ namespace music_performance_greenroom_server.Controllers
 
         private bool CourseExists(int id)
         {
-            return _context.Course.Any(e => e.CourseId == id);
+            return _context.Course.Any(e => e.Id == id);
         }
     }
 }
