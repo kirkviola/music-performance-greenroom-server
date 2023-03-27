@@ -1,9 +1,11 @@
+using GreenroomServer.TokenAuthentication;
 using Microsoft.EntityFrameworkCore;
 using music_performance_greenroom_server.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton<ITokenManager, TokenManager>();
 
 // For initial development locally
 var connectionString = builder.Configuration["DevEnv:ConnectionString"];
