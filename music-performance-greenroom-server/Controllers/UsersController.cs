@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GreenroomServer.Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ namespace music_performance_greenroom_server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [TokenAuthenticationFilter]
     public class UsersController : ControllerBase
     {
         private readonly GreenroomDbContext _context;
@@ -40,6 +42,13 @@ namespace music_performance_greenroom_server.Controllers
             }
 
             return user;
+        }
+
+        public async Task<ActionResult<User?>> GetUserByEmail(string email)
+        {
+            // Allow null value as this is used internally to authenticate users
+            return await _context.User.FirstOrDefaultAsync(user => user.Email == email);
+
         }
 
         // PUT: api/Users/5
