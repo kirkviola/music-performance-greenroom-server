@@ -18,6 +18,10 @@ namespace music_performance_greenroom_server.Models
         public virtual Course Course { get; set; }
         public virtual IEnumerable<Material> Materials { get; set; }
 
-        public Assignment() {}
+        public Assignment() 
+        {
+            this.Course = new Course();
+            this.Materials = new List<Material>();
+        }
     }
 }

@@ -13,6 +13,10 @@ namespace music_performance_greenroom_server.Models
         public virtual User User { get; set; }
         [JsonIgnore]
         public virtual Group Group { get; set; }
-        public UserGroup() { }
+        public UserGroup() 
+        { 
+            this.User = new User();
+            this.Group = new Group();
+        }
     }
 }

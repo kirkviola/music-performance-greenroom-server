@@ -17,6 +17,10 @@ namespace music_performance_greenroom_server.Models
         [JsonIgnore]
         public virtual User User { get; set; }
 
-        public Material() {}
+        public Material() 
+        {
+            this.Assignment = new Assignment();
+            this.User = new User();
+        }
     }
 }

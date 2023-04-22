@@ -9,6 +9,10 @@
 
         public virtual IEnumerable<UserCourse> UserCourses { get; set; }
         public virtual IEnumerable<Assignment> Assignments { get; set; }
-        public Course() { }
+        public Course() 
+        {
+            this.UserCourses = new List<UserCourse>();
+            this.Assignments = new List<Assignment>();
+        }
     }
 }
