@@ -7,6 +7,9 @@
 
         public virtual IEnumerable<UserGroup> UserGroups { get; set; }
 
-        public Group() { }
+        public Group() 
+        {
+            this.UserGroups = new List<UserGroup>();
+        }
     }
 }
